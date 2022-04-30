@@ -23,9 +23,30 @@ const { NotImplementedError } = require('../extensions/index.js');
  *  [1, 1, 1]
  * ]
  */
-function minesweeper(/* matrix */) {
-  throw new NotImplementedError('Not implemented');
-  // remove line with error and write your code here
+ function minesweeper(matrix) {
+  let newMatx = []
+  for (let i = 0; i < matrix.length; i++){
+    let arr = []
+    
+    for(let j = 0 ; j < matrix[i].length; j++) {
+
+      
+      let one = (i-1 < 0) || (j-1 < 0) ? 0 : matrix[i-1][j-1]  && matrix[i-1][j-1] == true? 1 : 0
+      let two = (i-1 < 0)  ? 0 :matrix[i-1][j]  && matrix[i-1][j]== true? 1 : 0
+      let three = (i-1 < 0)  ? 0 : matrix[i-1][j+1]  && matrix[i-1][j+1] == true? 1 : 0
+      let four =  (j-1 < 0) ? 0 : matrix[i][j-1]  && matrix[i][j-1] == true? 1 : 0
+      let six = matrix[i][j+1] && matrix[i][j+1]== true ? 1 : 0
+      let seven = (j-1 < 0) || (i+1 >= matrix.length)? 0 : matrix[i+1][j-1] && matrix[i+1][j-1]== true ? 1 : 0
+      let eight = (i+1 >= matrix.length)? 0: matrix[i+1][j]  && matrix[i+1][j]== true? 1 : 0
+      let nine = (i+1 >= matrix.length) ? 0: matrix[i+1][j+1]  && matrix[i+1][j+1]== true? 1 : 0
+
+      let total = one + two + three + four + six + seven + eight + nine
+      arr.push(total)
+      
+    }
+    newMatx.push(arr)
+  }
+  return newMatx
 }
 
 module.exports = {
